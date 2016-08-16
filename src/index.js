@@ -1,9 +1,14 @@
-// async await function
+// Async/Await requirements: Latest Chrome/FF browser or Babel: https://babeljs.io/docs/plugins/transform-async-to-generator/
+// Fetch requirements: Latest Chrome/FF browser or Github fetch polyfill: https://github.com/github/fetch
+
+// async function
 async function fetchAsync () {
-  return await fetch('https://api.github.com')
-      .then(response => {
-        return response.json()
-      })
+  // await response of fetch call
+  let response = await fetch('https://api.github.com');
+  // only proceed once promise is resolved
+  let data = await response.json();
+  // only proceed once second promise is resolved
+  return data;
 }
 
 // btn
@@ -12,14 +17,15 @@ var btn = document.getElementById('btn')
 btn.addEventListener('click', (event) => {
   event.preventDefault()
   output.innerHTML = 'fetching..'
-  // trigger async fetch
+  // trigger async function
+  // log response or catch error of fetch promise
   fetchAsync()
-      .then(response => {
-        console.log(response)
-        output.innerHTML = JSON.stringify(response, undefined, 2)
+      .then(data => {
+        console.log(data)
+        output.innerHTML = JSON.stringify(data, undefined, 2)
       })
-      .catch((reason) => {
+      .catch(reason => {
         console.log(reason)
-        output.innerHTML = JSON.stringify(reason, undefined, 2)
+        output.innerHTML = JSON.stringify(reason.message, undefined, 2)
       })
 })
