@@ -1,6 +1,3 @@
-// Async/Await requirements: Latest Chrome/FF browser or Babel: https://babeljs.io/docs/plugins/transform-async-to-generator/
-// Fetch requirements: Latest Chrome/FF browser or Github fetch polyfill: https://github.com/github/fetch
-
 // async function
 async function fetchAsync () {
   // await response of fetch call
